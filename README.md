@@ -154,6 +154,7 @@ public void export(Record<?> record) {
 }
 ```
 
+
 *** Only call updateLastExportedRecordPosition after the sink confirms the write. If the exporter crashes before acking, Zeebe will re‑deliver the record, which your sink should accept idempotently.
 
 ## Notes
