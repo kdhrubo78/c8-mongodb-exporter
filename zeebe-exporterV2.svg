@@ -1,0 +1,115 @@
+<svg width="1120" height="740" viewBox="0 0 1120 740" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <style>
+            .title{font: 700 22px Arial, Helvetica, sans-serif; fill:#0B4F8A}
+            .label{font: 700 16px Arial, Helvetica, sans-serif; fill:#102A43}
+            .text{font: 13px Arial, Helvetica, sans-serif; fill:#102A43}
+            .mono{font: 12px Menlo, Consolas, monospace; fill:#102A43}
+            .broker{fill:#E6F0FA; stroke:#8AB4F8; stroke-width:2}
+            .part{fill:#FFFFFF; stroke:#B8C5D6; stroke-width:1.5}
+            .leader{stroke:#2E7D32; stroke-width:2}
+            .follower{stroke:#9E9E9E; stroke-dasharray:6 4; stroke-width:2}
+            .exportBox{fill:#FDF6E3; stroke:#E0B646; stroke-width:1.5}
+            .badgeL{fill:#2E7D32; stroke:none}
+            .badgeF{fill:#9E9E9E; stroke:none}
+            .legendBox{fill:#F7F9FC; stroke:#D0D7E2; stroke-width:1}
+            .arrow{stroke:#64748B; stroke-width:1.5; marker-end:url(#arrowhead)}
+        </style>
+        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#64748B"/>
+        </marker>
+    </defs>
+
+    <!-- Title -->
+    <text class="title" x="560" y="20" text-anchor="middle">Zeebe Exporters in a Multi‑Node Cluster</text>
+
+
+    <!-- Column guides (optional light lines) -->
+    <line x1="373" y1="90" x2="373" y2="650" stroke="#EEF2F7"/>
+    <line x1="747" y1="90" x2="747" y2="650" stroke="#EEF2F7"/>
+
+    <!-- Broker 0 -->
+    <rect class="broker" x="60" y="100" rx="8" ry="8" width="260" height="540"/>
+    <text class="label" x="190" y="130" text-anchor="middle">Broker 0</text>
+
+    <!-- B0: Partition 1 (Leader) -->
+    <rect class="part leader" x="80" y="160" rx="6" ry="6" width="220" height="150"/>
+    <circle class="badgeL" cx="92" cy="172" r="7"/>
+    <text class="mono" x="108" y="176">Partition 1 — Leader</text>
+    <rect class="exportBox" x="95" y="192" rx="6" ry="6" width="190" height="100"/>
+    <text class="mono" x="105" y="215">ExporterDirector</text>
+    <text class="text" x="105" y="240">• Exporter A (e.g., Elasticsearch)</text>
+    <text class="text" x="105" y="262">• Exporter B (e.g., Kafka / RDBMS)</text>
+
+    <!-- B0: Partition 2 (Follower) -->
+    <rect class="part follower" x="80" y="330" rx="6" ry="6" width="220" height="120"/>
+    <circle class="badgeF" cx="92" cy="342" r="7"/>
+    <text class="mono" x="108" y="346">Partition 2 — Follower</text>
+    <text class="text" x="95" y="372">No exporting on followers</text>
+
+    <!-- B0: Partition 3 (Follower) -->
+    <rect class="part follower" x="80" y="470" rx="6" ry="6" width="220" height="120"/>
+    <circle class="badgeF" cx="92" cy="482" r="7"/>
+    <text class="mono" x="108" y="486">Partition 3 — Follower</text>
+    <text class="text" x="95" y="512">Replica only; waits for leader to</text>
+    <text class="text" x="95" y="532">mark segments deletable</text>
+
+    <!-- Broker 1 -->
+    <rect class="broker" x="434" y="100" rx="8" ry="8" width="260" height="540"/>
+    <text class="label" x="564" y="130" text-anchor="middle">Broker 1</text>
+
+    <!-- B1: Partition 1 (Follower) -->
+    <rect class="part follower" x="454" y="160" rx="6" ry="6" width="220" height="120"/>
+    <circle class="badgeF" cx="466" cy="172" r="7"/>
+    <text class="mono" x="482" y="176">Partition 1 — Follower</text>
+    <text class="text" x="469" y="202">No exporting on followers</text>
+
+    <!-- B1: Partition 2 (Leader) -->
+    <rect class="part leader" x="454" y="300" rx="6" ry="6" width="220" height="150"/>
+    <circle class="badgeL" cx="466" cy="312" r="7"/>
+    <text class="mono" x="482" y="316">Partition 2 — Leader</text>
+    <rect class="exportBox" x="469" y="332" rx="6" ry="6" width="190" height="100"/>
+    <text class="mono" x="479" y="355">ExporterDirector</text>
+    <text class="text" x="479" y="380">• Exporter A (e.g., Elasticsearch)</text>
+    <text class="text" x="479" y="402">• Exporter B (e.g., Kafka / RDBMS)</text>
+
+    <!-- B1: Partition 3 (Follower) -->
+    <rect class="part follower" x="454" y="470" rx="6" ry="6" width="220" height="120"/>
+    <circle class="badgeF" cx="466" cy="482" r="7"/>
+    <text class="mono" x="482" y="486">Partition 3 — Follower</text>
+    <text class="text" x="469" y="512">Replica only</text>
+
+    <!-- Broker 2 -->
+    <rect class="broker" x="808" y="100" rx="8" ry="8" width="260" height="540"/>
+    <text class="label" x="938" y="130" text-anchor="middle">Broker 2</text>
+
+    <!-- B2: Partition 1 (Follower) -->
+    <rect class="part follower" x="828" y="160" rx="6" ry="6" width="220" height="120"/>
+    <circle class="badgeF" cx="840" cy="172" r="7"/>
+    <text class="mono" x="856" y="176">Partition 1 — Follower</text>
+    <text class="text" x="843" y="202">No exporting on followers</text>
+
+    <!-- B2: Partition 2 (Follower) -->
+    <rect class="part follower" x="828" y="300" rx="6" ry="6" width="220" height="120"/>
+    <circle class="badgeF" cx="840" cy="312" r="7"/>
+    <text class="mono" x="856" y="316">Partition 2 — Follower</text>
+    <text class="text" x="843" y="342">Replica only</text>
+
+    <!-- B2: Partition 3 (Leader) -->
+    <rect class="part leader" x="828" y="440" rx="6" ry="6" width="220" height="150"/>
+    <circle class="badgeL" cx="840" cy="452" r="7"/>
+    <text class="mono" x="856" y="456">Partition 3 — Leader</text>
+    <rect class="exportBox" x="843" y="472" rx="6" ry="6" width="190" height="100"/>
+    <text class="mono" x="853" y="495">ExporterDirector</text>
+    <text class="text" x="853" y="520">• Exporter A (e.g., Elasticsearch)</text>
+    <text class="text" x="853" y="542">• Exporter B (e.g., Kafka / RDBMS)</text>
+
+    <!-- Gateway to cluster (context) -->
+    <rect x="440" y="24" rx="6" ry="6" width="240" height="36" fill="#EEF6FF" stroke="#8AB4F8" stroke-width="1.5"/>
+    <text class="mono" x="560" y="47" text-anchor="middle">Gateway / Clients → Cluster</text>
+    <line class="arrow" x1="560" y1="60" x2="190" y2="100"/>
+    <line class="arrow" x1="560" y1="60" x2="564" y2="100"/>
+    <line class="arrow" x1="560" y1="60" x2="938" y2="100"/>
+
+
+</svg>

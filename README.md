@@ -12,11 +12,16 @@ to download and run Camunda 8.8 on your machine.
 - mvn package
 
 
+## Start MongoDB
+
+- docker compose up 
+
+
 # References
 
-- https://docs.camunda.io/docs/self-managed/concepts/exporters/
-- https://camunda.com/blog/2025/04/creating-testing-custom-exporters-camunda-8-run/
-
+- Exporters - https://docs.camunda.io/docs/self-managed/concepts/exporters/
+- Blog - https://camunda.com/blog/2025/04/creating-testing-custom-exporters-camunda-8-run/
+- Install on K8S - https://docs.camunda.io/docs/self-managed/components/orchestration-cluster/zeebe/exporters/install-zeebe-exporters/
 
 ## Filter - User Task Only Exporter
 
@@ -98,3 +103,6 @@ public final class UserTaskOnlyExporter implements Exporter {
   }
 }
 ```
+
+
+![Zeebe Exporter](/zeebe-exporterV2.svg "Zeebe Exporter")
