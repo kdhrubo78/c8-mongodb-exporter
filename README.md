@@ -106,3 +106,37 @@ public final class UserTaskOnlyExporter implements Exporter {
 
 
 ![Zeebe Exporter](/zeebe-exporterV2.svg "Zeebe Exporter")
+
+
+
+- Only partition leaders export; followers never export. 
+- Export is at‑least‑once and resumes from snapshot position.
+- Leader: exports committed records via ExporterDirector; at‑least‑once delivery (resume from snapshot position)
+- Followers: replica only; waits for leader to mark segments deletable.
+- Follower: no exporting; retains replica and deletes segments only after leader marks safe
+
+# Why you need idempotency ?
+Exporting is at‑least‑once. 
+After a leader failover, the new leader resumes from the last snapshot position, so some records may be exported again. 
+Your sink must safely handle duplicates.  
+
+
+A stable unique event key is the combination of `partitionId + position`; 
+use this as the canonical identifier in your sink to deduplicate.  
+
+
+e.g
+
+```sql
+
+CREATE TABLE zeebe_records (
+  partition_id INT NOT NULL,
+  position BIGINT NOT NULL,
+  intent VARCHAR(64) NOT NULL,
+  value_type VARCHAR(64) NOT NULL,
+  ts TIMESTAMP NOT NULL,
+  payload JSONB NOT NULL,
+  PRIMARY KEY (partition_id, position)
+);
+
+```
