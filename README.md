@@ -140,3 +140,25 @@ CREATE TABLE zeebe_records (
 );
 
 ```
+
+```java
+public void export(Record<?> record) {
+  String id = record.getPartitionId() + "-" + record.getPosition();
+  try {
+    sink.upsert(id, record);      // upsert in ES/RDBMS/Mongo/Kafka
+    controller.updateLastExportedRecordPosition(record.getPosition());
+  } catch (TransientException e) {
+    // Don't advance position; Zeebe will retry export
+    retryLater(e);
+  }
+}
+```
+
+*** Only call updateLastExportedRecordPosition after the sink confirms the write. If the exporter crashes before acking, Zeebe will re‑deliver the record, which your sink should accept idempotently.
+
+## Notes
+
+- The partition leader writes periodic snapshots that include the exporter’s last exported position; 
+- this position is not stored in the event log.  
+- The snapshot (and therefore the position) is replicated to followers, so any broker that later becomes leader restores the exporter position from the latest snapshot.  
+- Because the exporter position is only in snapshots (not the log), after a leader failover exporting resumes from the snapshot’s position, which can cause at‑least‑once (duplicate) exports. 
